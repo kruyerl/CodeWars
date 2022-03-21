@@ -1,27 +1,43 @@
-/*
-
-A Narcissistic Number is a positive number which is the sum of its own digits, 
-each raised to the power of the number of digits in a given base. 
-In this Kata, we will restrict ourselves to decimal (base 10).
-For example, take 153 (3 digits), which is narcisstic:
-    1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153
-
-Your code must return true or false (not 'true' and 'false') 
-depending upon whether the given number is a Narcissistic number in base 10. 
-This may be True and False in your language, e.g. PHP.
-
-Error checking for text strings or other invalid inputs is not required, 
-only valid positive non-zero integers will be passed into the function.
+/*Write a function that takes a string of braces, and determines if the order of the braces is valid. It should return true if the string is valid, and false if it's invalid.
+What is considered Valid?
+A string of braces is considered valid if all braces are matched with the correct brace.
+Examples
+"(){}[]"   =>  True
+"([{}])"   =>  True
+"(}"       =>  False
+"[(])"     =>  False
+"[({})](]" =>  False
 */
+const test1 = "(){}[]";
+const test2 = "([{}])";
+const test3 = "(}";
+const test4 = "[(])";
+const test5 = "[({})](]";
 
-//145
+//find matching pairs next to each other and remove from the string
+//continue until cant match
 
-const calcSumOfPowers = (number) => {
-  const sumofpower = number
-    .toString()
-    .split("")
-    .reduce((total, num) => total + Math.pow(num, number.toString().length), 0);
-  return sumofpower === number ? true : false;
+const findPair = (str) => {};
+
+const validBraces = (braces) => {
+  let string = braces;
+  while (
+    string.includes("{}") ||
+    string.includes("[]") ||
+    string.includes("()")
+  ) {
+    string = string
+      .split("[]")
+      .join("")
+      .split("{}")
+      .join("")
+      .split("()")
+      .join("");
+  }
+  return string.length > 0 ? false : true;
 };
-
-console.log(calcSumOfPowers(1652));
+console.log(validBraces(test1));
+console.log(validBraces(test2));
+console.log(validBraces(test3));
+console.log(validBraces(test4));
+console.log(validBraces(test5));

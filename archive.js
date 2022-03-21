@@ -35,7 +35,7 @@ const towerBuilder = (nFloors) => {
       let spaces = maxCharacters - floor.length
       return `${" ".repeat(spaces / 2)}${floor}${" ".repeat(spaces / 2)}`
     }
-  }
+  };
   
 
   /*
@@ -59,3 +59,68 @@ const narcissistic = (number) => {
     return sumOfPower === number ? true : false;
   };
   
+
+  /*
+Return the number (count) of vowels in the given string.
+
+We will consider a, e, i, o, u as vowels for this Kata (but not y).
+
+The input string will only consist of lower case letters and/or spaces.
+*/
+
+const getCount = (str) => {
+  let vowelsCount = 0;
+  [...str].forEach((char) => {
+    if (char.match(/[aeiou]/gi)) vowelsCount++;
+  });
+  return vowelsCount;
+};
+
+/*
+Complete the solution so that it splits the string into pairs of two characters. If the string contains an odd number of characters then it should replace the missing second character of the final pair with an underscore ('_').
+
+Examples:
+
+* 'abc' =>  ['ab', 'c_']
+* 'abcdef' => ['ab', 'cd', 'ef']
+
+*/
+const string1 = "abc";
+const string2 = "abcdef";
+const string3 = "abcdefg";
+const string4 = "";
+const string5 = "a";
+
+const solution = (str) => {
+  if (str.length === 0) return [];
+  return `${str}${str.length % 2 === 0 ? "" : "_"}`.match(/.{2}/g);
+};
+const solution2 = (str) => `${str}_`.match(/.{2}/g) || [];
+
+/*Write a function that takes a string of braces, and determines if the order of the braces is valid. It should return true if the string is valid, and false if it's invalid.
+What is considered Valid?
+A string of braces is considered valid if all braces are matched with the correct brace.
+Examples
+"(){}[]"   =>  True
+"([{}])"   =>  True
+"(}"       =>  False
+"[(])"     =>  False
+"[({})](]" =>  False
+*/
+const validBraces = (braces) => {
+  let string = braces;
+  while (
+    string.includes("{}") ||
+    string.includes("[]") ||
+    string.includes("()")
+  ) {
+    string = string
+      .split("[]")
+      .join("")
+      .split("{}")
+      .join("")
+      .split("()")
+      .join("");
+  }
+  return string.length > 0 ? false : true;
+};
